@@ -1,0 +1,93 @@
+<%-- 
+    Document   : index
+    Created on : Aug 13, 2016, 3:11:30 PM
+    Author     : dell
+--%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="conn.MyCon"%>
+<%@page import="java.sql.Connection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<doctype html>
+    <% String id = (String)session.getAttribute("id");
+       String pas = (String)session.getAttribute("pass");
+ 
+        Connection con = MyCon.getCon();
+      if(id==null){
+    response.sendRedirect("index.jsp?msg=plz login first");
+   }
+   else
+   {
+   PreparedStatement ps = con.prepareStatement
+        ("select * from fac_reg where reg_no=? and password=?");
+   ps.setString(1, id);
+   ps.setString(2, pas);
+   ResultSet rs = ps.executeQuery();
+   if(rs.next()){
+    //session = request.getSession();
+   
+   }else{
+    response.sendRedirect("index.jsp?msg=Invalid username");
+   
+   }
+   }
+   %>
+<html>
+      <head>
+            <title>Welecome NITK</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width-device-width,initial-scale-1.0">
+            <link href="css/bootstrap.min.css" rel="stylesheet">
+            <link href="css/mycss.css" rel="stylesheet">
+             <link href="css/mycss.css" rel="stylesheet">
+            <script src="js/bootstrap.min.js"></script>
+             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>S
+      </head>
+       <body bgcolor="black">
+       <div class="container">  
+       <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">NITK SURATHKAL</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="fac_home.jsp">Home</a></li>
+              <li><a href="#">Assignment</a></li>
+               <li><a href="">Attendance</a>
+              <ul>
+                <li><a href="attendence.jsp">Add</a>
+                   
+                        <li><a href="fattendlist.jsp">View</a>
+               </ul>
+              </li>
+              <li><a href="upload.jsp">E-notes</a></li>
+              <li><a href="Notices.jsp">Notification</a></li>
+              <li><a href="flogout.jsp">Logout</a></li>
+             
+            </li>
+         
+            </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+        </div>
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      
+
+    </div> <!-- /container -->
+      <script src="js/jquery.js"></script>
+      
+      </body>
+</html>
